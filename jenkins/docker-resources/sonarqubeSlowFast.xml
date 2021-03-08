@@ -17,7 +17,8 @@ pipeline {
         }
 
         stage("Fast Tests") {
-            parallel(
+           step {
+                parallel(
                 Fast: {
                     sh './mvnw test -Dgroups="fast"'
                 },
@@ -25,7 +26,8 @@ pipeline {
                     sh './mvnw test -Dgroups="slow"'
                 }
                 )
-        }  
+            }  
+        }
 
         stage('SonarQube analysis') {
             steps {
