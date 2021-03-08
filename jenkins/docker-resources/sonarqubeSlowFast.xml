@@ -16,6 +16,18 @@ pipeline {
             }
         }
 
+        stage("Fast Tests") {
+            steps {
+             sh './mvnw test -Dgroups="fast"'
+         }
+        }
+
+        stage("Slow Tests") {
+            steps {
+             sh './mvnw test -Dgroups="slow"'
+         }
+        }
+
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
