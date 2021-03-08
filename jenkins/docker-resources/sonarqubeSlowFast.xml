@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Clone sources') {
             steps {
-                git url: 'https://github.com/tkgregory/sonarqube-jacoco-code-coverage.git'
+                git url: 'https://github.com/kennylomax/cloudlab18spring.git'
             }
         }
 
@@ -23,6 +23,7 @@ pipeline {
                 }
             }
         }
+        
         stage("Quality gate") {
             steps {
                 waitForQualityGate abortPipeline: true
