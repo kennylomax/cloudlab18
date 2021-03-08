@@ -3,7 +3,8 @@ unclassified:
     buildWrapperEnabled: false
     installations:
       - name: "SonarQube"
-        serverUrl: "localhost:9000"
+#        serverUrl: "localhost:9000"
+        serverUrl: "http://cloudlab18sonarservice.default.svc.cluster.local:8082"
         triggers:
           skipScmCause: false
           skipUpstreamCause: false

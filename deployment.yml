@@ -71,6 +71,6 @@ spec:
     spec:
       containers:
         - name: cloudlab18sonarapp
-          image: kenlomax/sonarforjenkins:v1 # Replace by your image name
+          image: kenlomax/sonarforjenkins:v2 # Replace by your image name
           ports:
             - containerPort: 9000 

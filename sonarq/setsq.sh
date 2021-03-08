@@ -8,7 +8,8 @@ until [[ $(curl -s GET -u admin:admin "http://localhost:9000/api/system/health")
   sleep 3;
 done
 
-curl "http://admin:admin@localhost:9000/api/webhooks/create" -X POST -d  "name=jenkins&url=http://jenkins:8080/sonarqube-webhook/"
+#curl "http://admin:admin@localhost:9000/api/webhooks/create" -X POST -d  "name=jenkins&url=http://jenkins:8080/sonarqube-webhook/"
+curl "http://admin:admin@localhost:9000/api/webhooks/create" -X POST -d  "name=jenkins&url=http://cloudlab18jenkinsservice.default.svc.cluster.local:8081/sonarqube-webhook/"
 curl -X POST -u admin:admin "http://localhost:9000/api/settings/set?key=sonar.forceAuthentication&value=false"
 curl "http://admin:admin@localhost:9000/api/qualitygates/create" -X POST -d  "name=myqualitygate"
 curl "http://admin:admin@localhost:9000/api/qualitygates/create_condition" -X POST -d  "gateName=myqualitygate&error=1&metric=sqale_rating&op=GT"
