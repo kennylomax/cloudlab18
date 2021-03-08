@@ -17,16 +17,15 @@ pipeline {
         }
 
         stage("Fast Tests") {
-            steps {
-             sh './mvnw test -Dgroups="fast"'
-         }
-        }
-
-        stage("Slow Tests") {
-            steps {
-             sh './mvnw test -Dgroups="slow"'
-         }
-        }
+            parallel(
+                Fast: {
+                    sh './mvnw test -Dgroups="fast"'
+                },
+                Slow: {
+                    sh './mvnw test -Dgroups="slow"'
+                }
+                )
+        }  
 
         stage('SonarQube analysis') {
             steps {
