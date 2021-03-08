@@ -1,0 +1,76 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cloudlab18jenkinsservice
+spec:
+  selector:
+    app: cloudlab18jenkinsapp
+  ports:
+    - protocol: "TCP"
+      # Port accessible inside cluster
+      port: 8081
+      # Port to forward to inside the pod
+      targetPort: 8080
+      # Port accessible outside cluster
+      nodePort: 30004
+  type: LoadBalancer
+  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudlab18jenkinsdeployment
+spec:
+  selector:
+    matchLabels:
+      app: cloudlab18jenkinsapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cloudlab18jenkinsapp
+    spec:
+      containers:
+        - name: cloudlab18jenkinsapp
+          image: kenlomax/jenkinsforsonar:v4 # Replace by your image name
+          ports:
+            - containerPort: 8080    
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cloudlab18sonarservice
+spec:
+  selector:
+    app: cloudlab18sonarapp
+  ports:
+    - protocol: "TCP"
+      # Port accessible inside cluster
+      port: 8082
+      # Port to forward to inside the pod
+      targetPort: 9000
+      # Port accessible outside cluster
+      nodePort: 30005
+  type: LoadBalancer
+  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudlab18sonardeployment
+spec:
+  selector:
+    matchLabels:
+      app: cloudlab18sonarapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cloudlab18sonarapp
+    spec:
+      containers:
+        - name: cloudlab18sonarapp
+          image: kenlomax/sonarforjenkins:v1 # Replace by your image name
+          ports:
+            - containerPort: 9000 
