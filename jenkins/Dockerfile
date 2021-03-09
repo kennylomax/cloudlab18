@@ -9,12 +9,8 @@ COPY docker-resources/jenkins.yaml /usr/share/jenkins/ref/jenkins.yaml
 #COPY docker-resources/sonarqubeBadCodeJob.xml /usr/share/jenkins/ref/jobs/sonarqube-bad-code/config.xml
 #COPY docker-resources/sonarqubeSlowFast.xml /usr/share/jenkins/ref/jobs/sonarqube-slowfast/config.xml
 
-
 COPY seedJob.xml /usr/share/jenkins/ref/jobs/seed-job/config.xml
-COPY createJobs.groovy /var/jenkins_home/jobs/seed-job/workspace/createJobs.groovy
-
-
-
+#COPY createJobs.groovy /var/jenkins_home/jobs/seed-job/workspace/createJobs.groovy
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 USER root
